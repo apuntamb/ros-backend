@@ -6,13 +6,12 @@ db = SQLAlchemy()
 
 
 class PerformanceProfile(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
     performance_record = db.Column(JSONB)
     performance_score = db.Column(JSONB)
     report_date = db.Column(db.Date, default=date.today())
     system_id = db.Column(db.Integer, primary_key=True)
     __table_args__ = (
-        db.UniqueConstraint('report_date'),
+        db.PrimaryKeyConstraint('system_id','report_date'),
         db.ForeignKeyConstraint(['system_id'], ['systems.id']),
     )
 
